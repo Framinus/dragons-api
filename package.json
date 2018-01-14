@@ -1,0 +1,39 @@
+{
+  "name": "api-testing",
+  "version": "1.0.0",
+  "description": "dragons api",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "mocha --exit",
+    "start:dev": "nodemon src/server.js",
+    "db:create": "createdb dragons",
+    "db:drop": "dropdb dragons",
+    "db:load": "psql dragons < src/model/data/schema.sql",
+    "db:seed": "psql dragons < src/model/data/seed.sql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "dragons-api"
+  },
+  "keywords": [
+    "dragons"
+  ],
+  "author": "James McCormack",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "pg-promise": "^7.3.3"
+  },
+  "devDependencies": {
+    "ajv": "^5.2.2",
+    "chai": "^4.1.2",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0",
+    "mocha": "^4.1.0"
+  }
+}
