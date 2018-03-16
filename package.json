@@ -10,7 +10,10 @@
     "db:create": "createdb dragons",
     "db:drop": "dropdb dragons",
     "db:load": "psql dragons < src/model/data/schema.sql",
-    "db:seed": "psql dragons < src/model/data/seed.sql"
+    "db:seed": "psql dragons < src/model/data/seed.sql",
+    "db:test:create": "createdb dragons_test",
+    "db:test:drop": "dropdb dragons_test",
+    "db:test:load": "psql dragons_test < src/model/data/schema.sql"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "pg-promise": "^7.3.3"
   },

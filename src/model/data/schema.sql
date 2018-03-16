@@ -1,6 +1,9 @@
 CREATE TABLE dragons (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255),
-  age INTEGER,
-  superpower VARCHAR(255)
+  type VARCHAR(255),
+  currentHP INTEGER,
+  maxHP INTEGER,
+  strength INTEGER,
+  defense INTEGER,
+  imageUrl TEXT
 );

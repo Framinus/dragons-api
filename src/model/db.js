@@ -1,5 +1,10 @@
 const pgp = require('pg-promise')();
 
-const db = pgp('postgres://localhost:5432/dragons');
+const connectionString =
+  process.env.NODE_ENV === 'test'
+    ? process.env.DATABASE_URL_TEST
+    : process.env.DATABASE_URL;
+
+const db = pgp(connectionString);
 
 module.exports = db;
