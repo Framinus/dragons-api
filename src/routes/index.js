@@ -1,11 +1,29 @@
 const router = require('express').Router();
-const { createDragon, listAllDragons } = require('../model/queries');
+const { createDragon, listAllDragons, listDragonById } = require('../model/queries');
 
 
 router.get('/dragons', (req, res) => {
   return listAllDragons()
     .then((dragons) => {
       res.json(dragons);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json({ errorMsg: 'error retrieving dragons' });
+    });
+});
+
+router.get('/dragons/:id', (req, res) => {
+  const { id } = req.params;
+  return listDragonById(id)
+    .then((dragon) => {
+      res.json(dragon);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json({
+        errorMsg: 'error retrieving dragon',
+      });
     });
 });
 
@@ -15,7 +33,10 @@ router.post('/dragons/create', (req, res) => {
     .then((newDragon) => {
       res.json({ newDragon });
     })
-    .catch(console.error);
+    .catch((err) => {
+      console.error(err);
+      res.json({ errorMsg: 'Error creating dragon' });
+    });
 });
 
 router.get('/dragons/random', (req, res) => {
@@ -24,6 +45,10 @@ router.get('/dragons/random', (req, res) => {
       const randomIndex = Math.floor(Math.random() * (dragons.length));
       const randomDragon = dragons[randomIndex];
       res.json({ randomDragon });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json({ errorMsg: 'Error retrieving random dragon' });
     });
 });
 
