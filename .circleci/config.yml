@@ -39,5 +39,4 @@ jobs:
       # run tests!
       - run: npm run db:test:create
       - run: npm run db:test:load
-      - run: npm run db:test:seed
-      - run: npm test 
+      - run: npm test
