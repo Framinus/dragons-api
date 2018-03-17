@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { createDragon, listAllDragonsByLevel, listDragonById } = require('../model/queries');
 
-
+// get all dragons of a particular level
 router.get('/dragons/:level', (req, res) => {
   const { level } = req.params;
   return listAllDragonsByLevel(level)
@@ -14,6 +14,7 @@ router.get('/dragons/:level', (req, res) => {
     });
 });
 
+// gets a dragon of a particular id
 router.get('/dragons/:id', (req, res) => {
   const { id } = req.params;
   return listDragonById(id)
@@ -28,6 +29,7 @@ router.get('/dragons/:id', (req, res) => {
     });
 });
 
+// add a dragon to the stock list.
 router.post('/dragons/create', (req, res) => {
   const { type, currentHP, maxHP, strength, defense, imageUrl } = req.body;
   return createDragon(type, currentHP, maxHP, strength, defense, imageUrl)
@@ -40,6 +42,7 @@ router.post('/dragons/create', (req, res) => {
     });
 });
 
+// retrieves a random dragon of a particular level.
 router.get('/dragons/random/:level', (req, res) => {
   const { level } = req.params;
   return listAllDragonsByLevel(level)
