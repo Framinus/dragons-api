@@ -2,7 +2,9 @@
 
 This is an API about dragons, designed for a game in progress.
 
-Here are the planned endpoints:
+## Endpoints
+
+This API is deployed at [https://dragons-game-api.herokuapp.com](https://dragons-game-api.herokuapp.com). Please use these paths to retrieve data from the api.
 
 - Retrieve all stock dragons from the database for a given level. Stock dragons currently are level 1, 2, or 3.
 
