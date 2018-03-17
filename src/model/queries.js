@@ -4,6 +4,7 @@ const db = require('./db');
 * Add a dragon to the database
 *
 * @param {string} type
+* @param {string} level
 * @param {number} currentHP
 * @param {number} maxHP
 * @param {number} strength
@@ -13,32 +14,34 @@ const db = require('./db');
 * representing the row added to the posts table.
 */
 
-const createDragon = (type, currentHP, maxHP, strength, defense, imageUrl) => {
+const createDragon = (type, level, currentHP, maxHP, strength, defense, imageUrl) => {
   const query = `
     INSERT INTO dragons
-      (type, currentHP, maxHP, strength, defense, imageUrl)
+      (type, level, currentHP, maxHP, strength, defense, imageUrl)
     VALUES
-      ($1, $2, $3, $4, $5, $6)
+      ($1, $2, $3, $4, $5, $6, $7)
     RETURNING
       *
     `;
 
-  return db.one(query, [type, currentHP, maxHP, strength, defense, imageUrl]);
+  return db.one(query, [type, level, currentHP, maxHP, strength, defense, imageUrl]);
 };
 
 /**
 * List all dragons in the database
+* @param {string} level
 * @returns {promise} - Promise that resolves to an object
-* representing all of the rows in the dragons table.
+* representing all of the rows in the dragons table that match a given level.
 */
 
-const listAllDragons = () => {
+const listAllDragonsByLevel = (level) => {
   const query = `
     SELECT
       *
     FROM
-      dragons`;
-  return db.any(query);
+      dragons
+    WHERE level=$1`;
+  return db.any(query, level);
 };
 
 /**
@@ -69,7 +72,6 @@ const listDragonById = (id) => {
 *
 */
 
-// delete
 const deleteDragonById = (id) => {
   const query = `
     DELETE
@@ -80,4 +82,4 @@ const deleteDragonById = (id) => {
   return db.oneOrNone(query, id);
 };
 
-module.exports = { createDragon, listAllDragons, listDragonById, deleteDragonById };
+module.exports = { createDragon, listAllDragonsByLevel, listDragonById, deleteDragonById };
