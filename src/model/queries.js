@@ -71,7 +71,13 @@ const listDragonById = (id) => {
 
 // delete
 const deleteDragonById = (id) => {
-  // create me!
+  const query = `
+    DELETE
+    FROM
+      dragons
+    WHERE id=$1
+  `;
+  return db.oneOrNone(query, id);
 };
 
 module.exports = { createDragon, listAllDragons, listDragonById, deleteDragonById };
