@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { createDragon, listAllDragonsByLevel, listDragonById } = require('../model/queries');
 
 // get all dragons of a particular level
-router.get('/dragons/:level', (req, res) => {
+router.get('/dragons/level/:level', (req, res) => {
   const { level } = req.params;
   return listAllDragonsByLevel(level)
     .then((dragons) => {

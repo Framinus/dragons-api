@@ -7,7 +7,7 @@ Here are the planned endpoints:
 - Retrieve all stock dragons from the database for a given level. Stock dragons currently are level 1, 2, or 3.
 
 ```
-GET - /dragons/:level
+GET - /dragons/level/:level
 ```
 
 - Retrieve a dragon by id:
