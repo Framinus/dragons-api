@@ -1,9 +1,10 @@
 const router = require('express').Router();
-const { createDragon, listAllDragons, listDragonById } = require('../model/queries');
+const { createDragon, listAllDragonsByLevel, listDragonById } = require('../model/queries');
 
 
-router.get('/dragons', (req, res) => {
-  return listAllDragons()
+router.get('/dragons/:level', (req, res) => {
+  const { level } = req.params;
+  return listAllDragonsByLevel(level)
     .then((dragons) => {
       res.json(dragons);
     })
@@ -39,8 +40,9 @@ router.post('/dragons/create', (req, res) => {
     });
 });
 
-router.get('/dragons/random', (req, res) => {
-  return listAllDragons()
+router.get('/dragons/random/:level', (req, res) => {
+  const { level } = req.params;
+  return listAllDragonsByLevel(level)
     .then((dragons) => {
       const randomIndex = Math.floor(Math.random() * (dragons.length));
       const randomDragon = dragons[randomIndex];
@@ -51,6 +53,5 @@ router.get('/dragons/random', (req, res) => {
       res.json({ errorMsg: 'Error retrieving random dragon' });
     });
 });
-
 
 module.exports = router;
