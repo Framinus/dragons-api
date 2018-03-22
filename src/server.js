@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const corsOptions = {
-  origin: 'http://localhost:3000/',
+  origin: 'http://localhost:3000',
   originSuccessStatus: 200,
 };
 
@@ -19,7 +19,7 @@ app.options('*', cors());
 
 app.use('/', routes);
 
-const port = process.env.PORT || 3000;
+const port = 3001;
 
 app.listen(port, () => {
   console.log(`App is listening on port ${port}`);
