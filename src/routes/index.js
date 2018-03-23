@@ -51,9 +51,13 @@ router.get('/dragons/random/:level', (req, res) => {
   const { level } = req.params;
   return listAllDragonsByLevel(level)
     .then((dragons) => {
-      const randomIndex = Math.floor(Math.random() * (dragons.length));
-      const randomDragon = dragons[randomIndex];
-      res.json({ randomDragon });
+      if (dragons.length > 0) {
+        const randomIndex = Math.floor(Math.random() * (dragons.length));
+        const randomDragon = dragons[randomIndex];
+        res.json({ randomDragon });
+      } else {
+        res.status(400).json({ errorMsg: 'that level does not exist' });
+      }
     })
     .catch((err) => {
       console.error(err);
