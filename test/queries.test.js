@@ -16,7 +16,7 @@ const databaseReset = function () {
 };
 
 describe('createDragon function', function () {
-  before(databaseReset);
+  before(() => databaseReset());
   it('adds a dragon to the database', function () {
     return queries.createDragon('blue', 1, 5, 30, 5, 15, 'fakeUrl.com/fake.png')
       .then((dragon) => {
@@ -35,11 +35,17 @@ describe('createDragon function', function () {
 });
 
 describe('listAllDragonsByLevel', function () {
-  before(databaseReset);
+  before(() => databaseReset());
   it('retrieves all dragons equaling level 1 from the database', function () {
     return queries.listAllDragonsByLevel(1)
       .then((dragons) => {
         expect(dragons.length).to.eql(1);
+      });
+  });
+  it('retrieves a level 1 dragon of type "red"', function () {
+    return queries.listAllDragonsByLevel(1)
+      .then((dragons) => {
+        expect(dragons[0].type).to.eql('red');
       });
   });
   it('retrieves all dragons equaling level 2 from the database', function () {
@@ -48,16 +54,28 @@ describe('listAllDragonsByLevel', function () {
         expect(dragons.length).to.eql(1);
       });
   });
+  it('retrieves a level 2 dragon of type "purple"', function () {
+    return queries.listAllDragonsByLevel(2)
+      .then((dragons) => {
+        expect(dragons[0].type).to.eql('purple');
+      });
+  });
   it('retrieves all dragons equaling level 3 from the database', function () {
     return queries.listAllDragonsByLevel(3)
       .then((dragons) => {
         expect(dragons.length).to.eql(1);
       });
   });
+  it('retrieves a level 3 dragon of type "indigo"', function () {
+    return queries.listAllDragonsByLevel(3)
+      .then((dragons) => {
+        expect(dragons[0].type).to.eql('indigo');
+      });
+  });
 });
 
 describe('listDragonById', function () {
-  before(databaseReset);
+  before(() => databaseReset());
   it('retrieves a dragon matching the given id from the database', function () {
     const testId = 1;
     return queries.listDragonById(testId)
@@ -68,7 +86,7 @@ describe('listDragonById', function () {
 });
 
 describe('deleteDragonById', function () {
-  before(databaseReset);
+  before(() => databaseReset());
   it('deletes a dragon corresponding to the given id', function () {
     const testId = 1;
     return queries.deleteDragonById(testId)

@@ -51,4 +51,33 @@ describe('api routes', function () {
       });
     });
   });
+  describe('/dragons/random/:level', () => {
+    let response;
+    context('level entered exists', () => {
+      before('load the route', () => {
+        return chai.request(app)
+          .get('/dragons/random/1')
+          .then(res => response = res)
+      });
+      it('returns a status of 200', () => {
+        expect(response).to.have.status(200);
+      });
+      it('returns json', () => {
+        expect(response).to.be.json;
+      });
+    });
+    context('level entered does not exist', () => {
+      before('load the route', () => {
+        return chai.request(app)
+          .get('/dragons/random/500')
+          .then(res => response = res)
+      });
+      it('returns a status of 400', () => {
+        expect(response).to.have.status(400);
+      });
+      it('returns json', () => {
+        expect(response).to.be.json;
+      });
+    });
+  });
 });
