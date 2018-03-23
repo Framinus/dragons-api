@@ -1,11 +1,11 @@
 INSERT INTO dragons (type, level, currentHP, maxHP, strength, defense, imageUrl)
-VALUES ('red', 1, 20, 20, 10, 7, 'fakeUrl.com/fake.png');
+VALUES ('red', 1, 20, 20, 10, 7, '/images/dragon_red.png');
 
 INSERT INTO dragons (type, level, currentHP, maxHP, strength, defense, imageUrl)
 VALUES ('blue', 1, 22, 22, 7, 10, 'fakeUrl.com/fake.png');
 
 INSERT INTO dragons (type, level, currentHP, maxHP, strength, defense, imageUrl)
-VALUES ('yellow', 1, 15, 15, 15, 8, 'fakeUrl.com/fake.png');
+VALUES ('yellow', 1, 15, 15, 15, 8, '/images/dragon_yellow.png');
 
 INSERT INTO dragons (type, level, currentHP, maxHP, strength, defense, imageUrl)
 VALUES ('purple', 2, 27, 27, 14, 14, 'fakeUrl.com/fake.png');
