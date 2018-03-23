@@ -1,7 +1,6 @@
 process.env.NODE_ENV = 'test';
-console.log('node env in test file', process.env.NODE_ENV);
 
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const queries = require('../src/model/queries');
 const helpers = require('../src/model/helpers');
 /* global define, it, describe, before, beforeEach */

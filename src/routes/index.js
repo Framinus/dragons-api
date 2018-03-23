@@ -6,7 +6,11 @@ router.get('/dragons/level/:level', (req, res) => {
   const { level } = req.params;
   return listAllDragonsByLevel(level)
     .then((dragons) => {
-      res.json(dragons);
+      if (dragons.length > 0) {
+        res.json(dragons);
+      } else {
+        res.status(400).json({ errorMsg: 'that level does not exist' });
+      }
     })
     .catch((err) => {
       console.error(err);
