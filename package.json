@@ -11,9 +11,11 @@
     "db:drop": "dropdb dragons",
     "db:load": "psql dragons < src/model/data/schema.sql",
     "db:seed": "psql dragons < src/model/data/seed.sql",
+    "db:test:drop": "dropdb dragons_test",
     "db:test:create": "createdb dragons_test",
     "db:test:drop": "dropdb dragons_test",
-    "db:test:load": "psql dragons_test < src/model/data/schema.sql"
+    "db:test:load": "psql dragons_test < src/model/data/schema.sql",
+    "db:test:seed": "psql dragons_test < src/model/data/seed.sql"
   },
   "repository": {
     "type": "git",

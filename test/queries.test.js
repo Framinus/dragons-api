@@ -6,11 +6,12 @@ const helpers = require('../src/model/helpers');
 /* global define, it, describe, before, beforeEach */
 
 const databaseReset = function () {
-  return helpers.clearAllDragons()
+  return helpers.clearAllData()
     .then(() => {
-      helpers.seedDatabase('red', 1, 10, 20, 10, 7, 'fakeUrl.com/fake.png');
-      helpers.seedDatabase('purple', 2, 27, 27, 14, 14, 'fakeUrl.com/fake.png');
-      helpers.seedDatabase('indigo', 3, 32, 32, 15, 16, 'fakeUrl.com/fake.png');
+      helpers.seedDragonsTable('red', 1, 10, 20, 10, 7, 'fakeUrl.com/fake.png');
+      helpers.seedDragonsTable('purple', 2, 27, 27, 14, 14, 'fakeUrl.com/fake.png');
+      helpers.seedDragonsTable('indigo', 3, 32, 32, 15, 16, 'fakeUrl.com/fake.png');
+      helpers.seedHumansTable('bob', 1, 10, 10, 10, 10, 'fakeUrl.com/fake.png');
     })
     .catch(console.error);
 };
@@ -95,6 +96,27 @@ describe('deleteDragonById', function () {
           .then((dragons) => {
             expect(dragons.length).to.eql(0);
           });
+      });
+  });
+});
+
+describe('listHumanById', function () {
+  before(() => databaseReset());
+  it('retrieves a dragon matching the given id from the database', function () {
+    const testId = 1;
+    return queries.listHumanById(testId)
+      .then((human) => {
+        expect(human.type).to.eql('bob');
+      });
+  });
+});
+
+describe('listAllHumans', function () {
+  before(() => databaseReset());
+  it('retrieves a list of all humans from the human table', function () {
+    return queries.listAllHumans()
+      .then((humans) => {
+        expect(humans.length).to.eql(1);
       });
   });
 });

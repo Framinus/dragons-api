@@ -1,7 +1,18 @@
 CREATE TABLE dragons (
   id SERIAL PRIMARY KEY,
-  level INTEGER,
   type VARCHAR(255),
+  level INTEGER,
+  currenthp INTEGER,
+  maxhp INTEGER,
+  strength INTEGER,
+  defense INTEGER,
+  imageurl TEXT
+);
+
+CREATE TABLE humans (
+  id SERIAL PRIMARY KEY,
+  type VARCHAR(255),
+  level INTEGER,
   currenthp INTEGER,
   maxhp INTEGER,
   strength INTEGER,
