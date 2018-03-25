@@ -24,3 +24,6 @@ VALUES ('magenta', 3, 31, 31, 16, 16, 'fakeUrl.com/fake.png');
 
 INSERT INTO dragons (type, level, currenthp, maxhp, strength, defense, imageurl)
 VALUES ('lavendar', 3, 25, 25, 20, 26, 'fakeUrl.com/fake.png');
+
+INSERT INTO humans (type, level, currenthp, maxhp, strength, defense, imageurl)
+VALUES ('Got Lost', 1, 10, 10, 5, 5, '/images/human1.png');

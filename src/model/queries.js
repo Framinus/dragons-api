@@ -82,4 +82,48 @@ const deleteDragonById = (id) => {
   return db.oneOrNone(query, id);
 };
 
-module.exports = { createDragon, listAllDragonsByLevel, listDragonById, deleteDragonById };
+/**
+*
+* Gets all humans from the humans table.
+* @returns {promise} - Promise that resolves to all rows in the humans table.
+*
+*/
+
+const listAllHumans = () => {
+  const query = `
+    SELECT
+      *
+    FROM
+      humans
+  `;
+  return db.any(query);
+};
+
+/**
+*
+* Gets a human by id from the humans table.
+* @param {number} id
+* @returns {promise} - returns a promise that resolves to a row in the humans table matching the given id.
+*
+*/
+
+const listHumanById = (id) => {
+  const query = `
+    SELECT
+      *
+    FROM
+      humans
+    WHERE
+      id=$1
+  `;
+  return db.one(query, [id]);
+};
+
+module.exports = {
+  createDragon,
+  listAllDragonsByLevel,
+  listDragonById,
+  listAllHumans,
+  listHumanById,
+  deleteDragonById,
+};
