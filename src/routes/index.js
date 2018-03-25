@@ -35,8 +35,8 @@ router.get('/dragons/:id', (req, res) => {
 
 // add a dragon to the stock list.
 router.post('/dragons/create', (req, res) => {
-  const { type, currentHP, maxHP, strength, defense, imageUrl } = req.body;
-  return createDragon(type, currentHP, maxHP, strength, defense, imageUrl)
+  const { type, currenthp, maxhp, strength, defense, imageurl } = req.body;
+  return createDragon(type, currenthp, maxhp, strength, defense, imageurl)
     .then((newDragon) => {
       res.json({ newDragon });
     })

@@ -14,17 +14,17 @@ const db = require('./db');
 * representing the row added to the posts table.
 */
 
-const createDragon = (type, level, currentHP, maxHP, strength, defense, imageUrl) => {
+const createDragon = (type, level, currenthp, maxhp, strength, defense, imageurl) => {
   const query = `
     INSERT INTO dragons
-      (type, level, currentHP, maxHP, strength, defense, imageUrl)
+      (type, level, currenthp, maxhp, strength, defense, imageurl)
     VALUES
       ($1, $2, $3, $4, $5, $6, $7)
     RETURNING
       *
     `;
 
-  return db.one(query, [type, level, currentHP, maxHP, strength, defense, imageUrl]);
+  return db.one(query, [type, level, currenthp, maxhp, strength, defense, imageurl]);
 };
 
 /**
