@@ -5,8 +5,8 @@ const db = require('./db');
 *
 * @param {string} type
 * @param {string} level
-* @param {number} currentHP
-* @param {number} maxHP
+* @param {number} currenthp
+* @param {number} maxhp
 * @param {number} strength
 * @param {number} defense
 * @param {string} imageUrl
