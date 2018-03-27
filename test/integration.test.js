@@ -81,4 +81,49 @@ describe('api routes', function () {
       });
     });
   });
+
+  describe('/humans', () => {
+    let response;
+    before('load the route', () => {
+      return chai.request(app)
+        .get('/humans')
+        .then(res => response = res)
+    });
+    it('returns a status of 200', () => {
+      expect(response).to.have.status(200);
+    });
+    it('returns json', () => {
+      expect(response).to.be.json;
+    });
+  });
+
+  describe('/humans/:id', () => {
+    let response;
+    context('id entered exists', () => {
+      before('load the route', () => {
+        return chai.request(app)
+          .get('/humans/1')
+          .then(res => response = res)
+      });
+      it('returns a status of 200', () => {
+        expect(response).to.have.status(200);
+      });
+      it('returns json', () => {
+        expect(response).to.be.json;
+      });
+    });
+    context('id entered does not exist', () => {
+      before('load the route', () => {
+        return chai.request(app)
+          .get('/humans/500')
+          .then(res => response = res)
+      });
+      it('returns a status of 400', () => {
+        expect(response).to.have.status(400);
+      });
+      it('returns json', () => {
+        expect(response).to.be.json;
+      });
+    });
+  });
 });

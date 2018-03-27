@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'test';
+console.log('process.env', process.env.NODE_ENV);
 
 const { expect } = require('chai');
 const queries = require('../src/model/queries');
@@ -102,10 +103,11 @@ describe('deleteDragonById', function () {
 
 describe('listHumanById', function () {
   before(() => databaseReset());
-  it('retrieves a dragon matching the given id from the database', function () {
+  it('retrieves a human matching the given id from the database', function () {
     const testId = 1;
     return queries.listHumanById(testId)
       .then((human) => {
+        console.log('human', human);
         expect(human.type).to.eql('bob');
       });
   });

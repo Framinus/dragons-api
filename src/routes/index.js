@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { createDragon, listAllDragonsByLevel, listDragonById } = require('../model/queries');
+const { createDragon, listAllDragonsByLevel, listAllHumans, listDragonById, listHumanById } = require('../model/queries');
 
 // get all dragons of a particular level
 router.get('/dragons/level/:level', (req, res) => {
@@ -26,7 +26,7 @@ router.get('/dragons/:id', (req, res) => {
       res.json(dragon);
     })
     .catch((err) => {
-      console.error(err);
+      console.error('error from dragons/:id', err);
       res.json({
         errorMsg: 'error retrieving dragon',
       });
@@ -41,7 +41,7 @@ router.post('/dragons/create', (req, res) => {
       res.json({ newDragon });
     })
     .catch((err) => {
-      console.error(err);
+      console.error('error from dragons/create', err);
       res.json({ errorMsg: 'Error creating dragon' });
     });
 });
@@ -60,8 +60,32 @@ router.get('/dragons/random/:level', (req, res) => {
       }
     })
     .catch((err) => {
-      console.error(err);
+      console.error('error from dragons/random/:level', err);
       res.json({ errorMsg: 'Error retrieving random dragon' });
+    });
+});
+
+// retrieves all humans from the database.
+router.get('/humans', (req, res) => {
+  return listAllHumans()
+    .then((humans) => {
+      res.json({ humans });
+    })
+    .catch((err) => {
+      console.error('error from /humans', err);
+      res.json({ errorMsg: 'Error retrieving list of humans' });
+    });
+});
+
+router.get('/humans/:id', (req, res) => {
+  const { id } = req.params;
+  return listHumanById(id)
+    .then((human) => {
+      res.json({ human });
+    })
+    .catch((err) => {
+      console.error('Error from /humans/:id', err);
+      res.status(400).json({ errorMsg: 'Error retrieving human from database.' });
     });
 });
 

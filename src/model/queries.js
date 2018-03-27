@@ -116,7 +116,7 @@ const listHumanById = (id) => {
     WHERE
       id=$1
   `;
-  return db.one(query, [id]);
+  return db.one(query, id);
 };
 
 module.exports = {
