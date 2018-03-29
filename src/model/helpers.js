@@ -1,5 +1,7 @@
 const db = require('./db');
 
+// if it's for tests only, put it in the tests folder
+
 const clearAllDragons = () => {
   return db.oneOrNone(`
     TRUNCATE dragons RESTART IDENTITY;`);

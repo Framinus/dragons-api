@@ -6,6 +6,7 @@ const queries = require('../src/model/queries');
 const helpers = require('../src/model/helpers');
 /* global define, it, describe, before, beforeEach */
 
+// TODO: DRY this out
 const databaseReset = function () {
   return helpers.clearAllData()
     .then(() => {
