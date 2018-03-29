@@ -9,22 +9,21 @@ const db = require('./db');
 * @param {number} maxhp
 * @param {number} strength
 * @param {number} defense
-* @param {string} imageUrl
+* @param {string} imageurl
 * @returns {promise} - Promise that resolves to an object
 * representing the row added to the posts table.
 */
-
 const createDragon = (type, level, currenthp, maxhp, strength, defense, imageurl) => {
   const query = `
     INSERT INTO dragons
       (type, level, currenthp, maxhp, strength, defense, imageurl)
     VALUES
-      ($1, $2, $3, $4, $5, $6, $7)
+      ($/type/, $/level/, $/currenthp/, $/maxhp/, $/strength/, $/defense/, $/imageurl/)
     RETURNING
       *
     `;
 
-  return db.one(query, [type, level, currenthp, maxhp, strength, defense, imageurl]);
+  return db.one(query, args);
 };
 
 /**
