@@ -23,6 +23,7 @@ const databaseReset = function () {
 
 describe('api routes', function () {
   before('reset the database', () => databaseReset());
+
   describe('/dragons/level/:level', () => {
     let response;
     context('level entered exists', () => {
@@ -52,6 +53,7 @@ describe('api routes', function () {
       });
     });
   });
+
   describe('/dragons/random/:level', () => {
     let response;
     context('level entered exists', () => {
@@ -82,12 +84,27 @@ describe('api routes', function () {
     });
   });
 
+  describe('/dragons/create', () => {
+    let response;
+    before('load the route', () => {
+      return chai.request(app)
+      .post('/dragons/create')
+      .then(res => response = res)
+    });
+    it('returns a status of 200', () => {
+      expect(response).to.have.status(200);
+    });
+    it('returns json', () => {
+      expect(response).to.be.json;
+    });
+  })
+
   describe('/humans', () => {
     let response;
     before('load the route', () => {
       return chai.request(app)
         .get('/humans')
-        .then(res => response = res)
+        .then(res => response = res);
     });
     it('returns a status of 200', () => {
       expect(response).to.have.status(200);

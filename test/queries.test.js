@@ -107,7 +107,6 @@ describe('listHumanById', function () {
     const testId = 1;
     return queries.listHumanById(testId)
       .then((human) => {
-        console.log('human', human);
         expect(human.type).to.eql('bob');
       });
   });
