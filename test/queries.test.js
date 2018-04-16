@@ -9,10 +9,16 @@ const helpers = require('../src/model/helpers');
 const databaseReset = function () {
   return helpers.clearAllData()
     .then(() => {
-      helpers.seedDragonsTable('red', 1, 10, 20, 10, 7, 'fakeUrl.com/fake.png');
-      helpers.seedDragonsTable('purple', 2, 27, 27, 14, 14, 'fakeUrl.com/fake.png');
-      helpers.seedDragonsTable('indigo', 3, 32, 32, 15, 16, 'fakeUrl.com/fake.png');
-      helpers.seedHumansTable('bob', 1, 10, 10, 10, 10, 'fakeUrl.com/fake.png');
+      return helpers.seedDragonsTable('red', 1, 10, 20, 10, 7, 'fakeUrl.com/fake.png')
+        .then(() => {
+          return helpers.seedDragonsTable('purple', 2, 27, 27, 14, 14, 'fakeUrl.com/fake.png')
+            .then(() => {
+              return helpers.seedDragonsTable('indigo', 3, 32, 32, 15, 16, 'fakeUrl.com/fake.png')
+                .then(() => {
+                  return helpers.seedHumansTable('bob', 1, 10, 10, 10, 10, 'fakeUrl.com/fake.png');
+                })
+            })
+        })
     })
     .catch(console.error);
 };
@@ -36,12 +42,22 @@ describe('createDragon function', function () {
   });
 });
 
+describe('listAllDragons', function() {
+  before(() => databaseReset());
+  it('retrieves all dragons from the database', function() {
+    return queries.listAllDragons()
+      .then((dragons) => {
+        expect(dragons.length).to.equal(3);
+      })
+  });
+});
+
 describe('listAllDragonsByLevel', function () {
   before(() => databaseReset());
   it('retrieves all dragons equaling level 1 from the database', function () {
     return queries.listAllDragonsByLevel(1)
       .then((dragons) => {
-        expect(dragons.length).to.eql(1);
+        expect(dragons.length).to.equal(1);
       });
   });
   it('retrieves a level 1 dragon of type "red"', function () {
@@ -117,7 +133,7 @@ describe('listAllHumans', function () {
   it('retrieves a list of all humans from the human table', function () {
     return queries.listAllHumans()
       .then((humans) => {
-        expect(humans.length).to.eql(1);
+        expect(humans.length).to.equal(1);
       });
   });
 });

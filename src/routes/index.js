@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { createDragon, listAllDragonsByLevel, listAllHumans, listDragonById, listHumanById } = require('../model/queries');
+const { createDragon, listAllDragons, listAllDragonsByLevel, listAllHumans, listDragonById, listHumanById } = require('../model/queries');
 
 // get all dragons of a particular level
 router.get('/dragons/level/:level', (req, res) => {
@@ -11,6 +11,18 @@ router.get('/dragons/level/:level', (req, res) => {
       } else {
         res.status(400).json({ errorMsg: 'that level does not exist' });
       }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json({ errorMsg: 'error retrieving dragons' });
+    });
+});
+
+// gets all dragons from the database.
+router.get('/dragons', (req, res) => {
+  return listDragonById()
+    .then((dragons) => {
+      res.json(dragons);
     })
     .catch((err) => {
       console.error(err);
