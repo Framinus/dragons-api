@@ -20,7 +20,7 @@ router.get('/dragons/level/:level', (req, res) => {
 
 // gets all dragons from the database.
 router.get('/dragons', (req, res) => {
-  return listDragonById()
+  return listAllDragons()
     .then((dragons) => {
       res.json(dragons);
     })
