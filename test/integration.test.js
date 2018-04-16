@@ -24,6 +24,21 @@ const databaseReset = function () {
 describe('api routes', function () {
   before('reset the database', () => databaseReset());
 
+  describe('/dragons', () => {
+    let response;
+    before('load the route', () => {
+      return chai.request(app)
+        .get('/dragons')
+        .then(res => response = res)
+    });
+    it('returns a status of 200', () => {
+      expect(response).to.have.status(200);
+    });
+    it('returns json', () => {
+      expect(response).to.be.json;
+    });
+  })
+
   describe('/dragons/level/:level', () => {
     let response;
     context('level entered exists', () => {
