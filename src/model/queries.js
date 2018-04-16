@@ -28,7 +28,7 @@ const createDragon = (type, level, currenthp, maxhp, strength, defense, imageurl
 };
 
 /**
-* List all dragons in the database
+* List all dragons of a particular level in the database.
 * @param {string} level
 * @returns {promise} - Promise that resolves to an object
 * representing all of the rows in the dragons table that match a given level.
@@ -42,6 +42,22 @@ const listAllDragonsByLevel = (level) => {
       dragons
     WHERE level=$1`;
   return db.any(query, level);
+};
+
+/**
+* List all dragons in the database.
+*
+* @returns {promise} - Promise that resolves to an array representing all of the rows in the dragons database.
+*/
+
+const listAllDragons = () => {
+  const query = `
+    SELECT
+      *
+    FROM
+      dragons
+  `;
+  return db.any(query);
 };
 
 /**
@@ -121,6 +137,7 @@ const listHumanById = (id) => {
 
 module.exports = {
   createDragon,
+  listAllDragons,
   listAllDragonsByLevel,
   listDragonById,
   listAllHumans,
